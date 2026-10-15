@@ -765,6 +765,45 @@ struct Step1FreeTextView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var navState: NavState
     @State private var inputText = ""
+    
+    private let relevantKeywords = [
+        "anamnese", "bewusstsein", "neurolog", "mkg",
+        "untersuch", "schmerz", "blutung", "kopf",
+        "zahn", "fraktur", "avulsion", "sturz", "fragen", "ct", "mrt"
+    ]
+
+    private var wordCount: Int {
+        inputText.split(whereSeparator: \.isWhitespace).count
+    }
+
+    private var matchedKeywords: [String] {
+        let normalizedText = inputText.folding(
+            options: [.diacriticInsensitive, .caseInsensitive],
+            locale: .current
+        )
+
+        return relevantKeywords.filter { normalizedText.contains($0) }
+    }
+
+    private var isAnswerValid: Bool {
+        wordCount >= 6 && matchedKeywords.count >= 2
+    }
+
+    private var validationMessage: String? {
+        guard !inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return nil
+        }
+
+        if wordCount < 6 {
+            return "Formuliere bitte mindestens sechs Wörter."
+        }
+
+        if matchedKeywords.count < 2 {
+            return "Interessanter Ansatz. Vergleiche deine Überlegungen noch mit dem Hinweis von Dr. Lukas, bevor du weitergehst."
+        }
+
+        return "Gute erste Einschätzung – du kannst fortfahren."
+    }
 
     var body: some View {
         ScrollView {
@@ -810,8 +849,21 @@ struct Step1FreeTextView: View {
                 Text("\(inputText.count) / 300")
                     .font(.system(size: 11)).foregroundColor(Color(hex: "9CA3AF"))
                     .frame(maxWidth: .infinity, alignment: .trailing).padding(.horizontal, 16)
+                
+                if let validationMessage {
+                    Label(
+                        validationMessage,
+                        systemImage: isAnswerValid
+                            ? "checkmark.circle.fill"
+                            : "exclamationmark.circle.fill"
+                    )
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(isAnswerValid ? .green : .orange)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 16)
+                }
 
-                DrLukasHintView(text: "Denken Sie nicht nur an Zähne – der Patient hatte einen Sturz am Kopf! An Neurologie und MKG-Chirurgie denken.")
+                DrLukasHintView(text: "Denken Sie nicht nur an Zähne – der Patient hatte einen Sturz am Kopf! An Neurologie und MKG-Chirurgie denken. Was sollten Sie bei dem Patienten anordnen")
 
                 NavigationLink(destination: Step2MCQView()) {
                     Text("Weiter")
