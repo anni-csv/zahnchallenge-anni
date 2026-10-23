@@ -34,11 +34,8 @@ class GeminiService {
 
     func evaluate(imageData: Data, prompt: String) async throws -> String {
         let key = APIKey.default
-        print("🔑 API Key (ersten 10 Zeichen): \(String(key.prefix(10)))...")
-        print("📡 Starte Gemini API-Aufruf...")
 
         guard !key.isEmpty, key != "DEIN-API-KEY-HIER" else {
-            print("❌ Kein API Key gefunden!")
             throw GeminiError.noAPIKey
         }
 
@@ -66,24 +63,19 @@ class GeminiService {
 
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
 
-        print("📤 Sende Request an: \(url.absoluteString.prefix(60))...")
         let (data, response) = try await URLSession.shared.data(for: request)
 
         if let http = response as? HTTPURLResponse {
-            print("📥 HTTP Status: \(http.statusCode)")
             if http.statusCode != 200 {
                 let msg = String(data: data, encoding: .utf8) ?? "Unbekannter API-Fehler"
-                print("❌ API Fehler: \(msg)")
                 throw GeminiError.apiError(http.statusCode, msg)
             }
         }
 
         let decoded = try JSONDecoder().decode(GeminiResponse.self, from: data)
         guard let text = decoded.candidates?.first?.content.parts.first?.text else {
-            print("⚠️ Antwort leer – Candidates: \(decoded.candidates?.count ?? 0)")
             throw GeminiError.emptyResponse
         }
-        print("✅ Gemini hat geantwortet (\(text.count) Zeichen)")
         return text
     }
 }
