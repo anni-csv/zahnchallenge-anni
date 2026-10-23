@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# Gemini API-Key (niemals committen)
+GenerativeAI-Info.plist
+
+# Sonstiges
+*.log
