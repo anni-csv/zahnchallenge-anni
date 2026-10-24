@@ -36,10 +36,24 @@ SwiftUI · SceneKit · QuickLook AR · WidgetKit · Google Gemini API · UserDef
 
 ## Project structure
 
-- `Hackathon_Zahnmed_Challenge/` — main app: frontend, case data, Gemini integration, 3D assets (USDZ)
-- `Fall1Widget/` — WidgetKit extension
+```
+Hackathon_Zahnmed_Challenge/
+├── App/              App entry point, ContentView, global state (AppState, NavState)
+├── Models/           Data types (PatientCase, ZahnModell)
+├── DesignSystem/     Colors and shared styling helpers
+├── Services/Gemini/  Gemini API client, view model and prompts
+├── Views/
+│   ├── Home/         Start screen sections (top bar, hero, case cards, avatar sheet)
+│   ├── Navigation/   Bottom bars
+│   ├── Case/         Case detail, case completed and the 8 case steps (Steps/)
+│   ├── Components/   Reusable UI (progress bar, Dr. Lukas hint, question card, buttons, image picker)
+│   └── Model3D/      3D model overview, detail, SceneKit and AR Quick Look viewers
+├── Resources/3DModels/  USDZ models
+└── Assets.xcassets
+Fall1Widget/          WidgetKit extension
+```
 
-Refactoring in progress: splitting views, services and models into dedicated folders.
+The Xcode project uses synchronized folders: new files and folders inside `Hackathon_Zahnmed_Challenge/` are picked up automatically.
 
 ## Status
 
