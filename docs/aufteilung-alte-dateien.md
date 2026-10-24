@@ -17,7 +17,7 @@ Alle Pfade sind relativ zu `Hackathon_Zahnmed_Challenge/`.
 |---|---|---|
 | `ContentView` (Startseite / Root) | `App/ContentView.swift` | |
 | `NavState` | `App/NavState.swift` | |
-| `PersistentBottomBar` (Leiste in den Fall-Schritten) | `Views/Navigation/PersistentBottomBar.swift` | `PersistentBarItem`, `withPersistentBottomBar()` |
+| `PersistentBottomBar` (Leiste in den Fall-Schritten) | ~~`Views/Navigation/PersistentBottomBar.swift`~~ → später mit `BottomNavView` zu **einer** Leiste zusammengelegt (#5), jetzt `withBottomNav()` | `PersistentBarItem` |
 | `BottomNavView` (Leiste auf der Startseite) | `Views/Navigation/BottomNavView.swift` | |
 
 ### Startseite
