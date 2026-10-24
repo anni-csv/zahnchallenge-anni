@@ -4,6 +4,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var state = AppState()
     @StateObject private var navState = NavState()
+    @StateObject private var backend = BackendService()
 
     var body: some View {
         NavigationStack {
@@ -26,14 +27,23 @@ struct ContentView: View {
             }
             .background(Color(hex: "F9FAFB"))
             .ignoresSafeArea(edges: .bottom)
-            .sheet(isPresented: $state.showAvatarSheet) {
-                AvatarSheetView()
-                    .presentationDetents([.fraction(0.55)])
-                    .presentationCornerRadius(24)
+            .sheet(item: $state.activeSheet) { sheet in
+                switch sheet {
+                case .avatar:
+                    AvatarSheetView()
+                        .presentationDetents([.fraction(0.55)])
+                        .presentationCornerRadius(24)
+                case .profile:
+                    ProfileSheetView()
+                case .ranking:
+                    LeaderboardView()
+                }
             }
         }
         .environmentObject(navState)
         .environmentObject(state)
+        .environmentObject(backend)
+        .task { await backend.start() }
         .id(navState.rootID)
     }
 }

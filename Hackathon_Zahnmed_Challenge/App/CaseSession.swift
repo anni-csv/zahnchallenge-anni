@@ -22,6 +22,14 @@ class CaseSession: ObservableObject {
         scores[step.id] = score
     }
 
+    /// Startet den Fall von vorn (neue Mischung, keine Punkte, kein KI-Feedback).
+    func restart() {
+        scores = [:]
+        aiFeedback = nil
+        currentIndex = 0
+        isFinished = false
+    }
+
     func advance() {
         if currentIndex + 1 < patientCase.steps.count {
             currentIndex += 1
