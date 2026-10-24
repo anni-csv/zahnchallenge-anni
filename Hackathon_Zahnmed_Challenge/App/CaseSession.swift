@@ -8,6 +8,8 @@ class CaseSession: ObservableObject {
     @Published private(set) var currentIndex = 0
     @Published private(set) var isFinished = false
     @Published private(set) var scores: [String: Int] = [:]
+    /// Gegebene und richtige Antwort je Schritt (als Text) – damit Dr. Lukas Fehler erklären kann
+    @Published private(set) var answers: [String: (given: String, correct: String)] = [:]
     @Published var aiFeedback: String?
 
     init(patientCase: PatientCase) {
@@ -18,13 +20,15 @@ class CaseSession: ObservableObject {
     var stepNumber: Int { currentIndex + 1 }
     var totalScore: Int { scores.values.reduce(0, +) }
 
-    func record(_ score: Int, for step: CaseStep) {
+    func record(_ score: Int, for step: CaseStep, given: String, correct: String) {
         scores[step.id] = score
+        answers[step.id] = (given, correct)
     }
 
     /// Startet den Fall von vorn (neue Mischung, keine Punkte, kein KI-Feedback).
     func restart() {
         scores = [:]
+        answers = [:]
         aiFeedback = nil
         currentIndex = 0
         isFinished = false

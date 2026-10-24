@@ -5,14 +5,14 @@ struct UploadStepView: View {
     let step: CaseStep
     let task: UploadTask
     @ObservedObject var session: CaseSession
-    @StateObject private var geminiVM = GeminiViewModel()
+    @State private var isEvaluating = false
     @State private var images: [UIImage] = []
     @State private var showPicker = false
 
     private var usesAI: Bool { task.aiPrompt != nil }
 
     private var submitTitle: String {
-        if geminiVM.isEvaluating { return "KI wertet aus…" }
+        if isEvaluating { return "Dr. Lukas wertet aus…" }
         return usesAI ? "Zur Kontrolle an KI abgeben" : "Abgeben"
     }
 
@@ -20,7 +20,7 @@ struct UploadStepView: View {
         StepScaffold(step: step, session: session, typeLabel: "PRAXISAUFGABE",
                      isSubmitted: false, score: 0,
                      submitTitle: submitTitle,
-                     canSubmit: images.count >= task.minFiles && !geminiVM.isEvaluating,
+                     canSubmit: images.count >= task.minFiles && !isEvaluating,
                      onSubmit: submit) {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
                 ForEach(0..<task.maxFiles, id: \.self) { idx in
@@ -43,14 +43,20 @@ struct UploadStepView: View {
     }
 
     private func submit() {
-        guard let prompt = task.aiPrompt, let firstImage = images.first else {
+        guard let prompt = task.aiPrompt,
+              let imageData = images.first?.jpegData(compressionQuality: 0.5) else {
             session.advance()
             return
         }
-        geminiVM.uploadedImage = firstImage
+        isEvaluating = true
         Task {
-            await geminiVM.evaluate(prompt: prompt)
-            session.aiFeedback = geminiVM.feedbackText
+            do {
+                session.aiFeedback = try await DrLukasService.evaluatePhoto(imageData, prompt: prompt)
+            } catch {
+                // Ehrlich bleiben: kein erfundenes Feedback, wenn die KI nicht erreichbar ist
+                session.aiFeedback = "Die KI-Auswertung ist gerade nicht verfügbar (\(error.localizedDescription)). Deine Bilder wurden nicht bewertet."
+            }
+            isEvaluating = false
             session.advance()
         }
     }

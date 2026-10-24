@@ -3,7 +3,7 @@ import Combine
 
 // MARK: - APP SHEETS
 enum AppSheet: String, Identifiable {
-    case avatar, profile, ranking
+    case avatar, profile, ranking, tour, drLukasChat
     var id: String { rawValue }
 }
 
@@ -12,6 +12,7 @@ class AppState: ObservableObject {
     @Published var selectedTab: Int = 0
     @Published var selectedCategory: String = "Notfallbehandlung"
     @Published var activeSheet: AppSheet?
+    @Published private(set) var hasSeenTour = UserDefaults.standard.bool(forKey: "hasSeenTour")
     @Published private(set) var bestScores: [String: Int] = [:]
     @Published private(set) var completedCaseIDs: Set<String> = []
 
@@ -53,6 +54,11 @@ class AppState: ObservableObject {
         completedCaseIDs.remove(patientCase.id)
         UserDefaults.standard.set(bestScores, forKey: "bestScores")
         UserDefaults.standard.set(false, forKey: "\(patientCase.id)_completed")
+    }
+
+    func markTourSeen() {
+        hasSeenTour = true
+        UserDefaults.standard.set(true, forKey: "hasSeenTour")
     }
 
     func resetAllProgress() {

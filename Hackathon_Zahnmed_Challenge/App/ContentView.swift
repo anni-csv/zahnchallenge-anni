@@ -37,6 +37,10 @@ struct ContentView: View {
                     ProfileSheetView()
                 case .ranking:
                     LeaderboardView()
+                case .tour:
+                    AppTourView()
+                case .drLukasChat:
+                    DrLukasChatView(mode: .ask(nil), greetingName: backend.profile?.nickname)
                 }
             }
         }

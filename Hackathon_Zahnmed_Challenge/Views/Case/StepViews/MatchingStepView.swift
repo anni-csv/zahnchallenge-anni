@@ -28,7 +28,9 @@ struct MatchingStepView: View {
 
     private func submit() {
         score = StepScoring.matching(selections: selections, pairs: task.pairs, points: step.points)
-        session.record(score, for: step)
+        session.record(score, for: step,
+                       given: task.pairs.map { "\($0.item): \(selections[$0.item] ?? "–")" }.joined(separator: "; "),
+                       correct: task.pairs.map { "\($0.item): \($0.answer)" }.joined(separator: "; "))
         withAnimation(.easeInOut) { submitted = true }
     }
 }

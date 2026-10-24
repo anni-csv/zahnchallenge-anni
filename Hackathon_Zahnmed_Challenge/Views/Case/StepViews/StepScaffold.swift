@@ -53,9 +53,7 @@ struct StepScaffold<Content: View>: View {
                     }
                 }
 
-                if let hint = step.drLukasHint {
-                    DrLukasHintView(text: hint)
-                }
+                DrLukasPanel(step: step, session: session, isSubmitted: isSubmitted, score: score)
 
                 if isSubmitted {
                     Button(action: session.advance) {
