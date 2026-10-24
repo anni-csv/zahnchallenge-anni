@@ -29,7 +29,7 @@ struct CaseRunnerView: View {
                          : "Schritt \(session.stepNumber) von \(session.patientCase.totalSteps)")
         .navigationBarTitleDisplayMode(.inline)
         .background(Color(hex: "F9FAFB").ignoresSafeArea())
-        .withPersistentBottomBar()
+        .withBottomNav()
     }
 }
 

@@ -9,7 +9,6 @@ enum AppSheet: String, Identifiable {
 
 // MARK: - APP STATE
 class AppState: ObservableObject {
-    @Published var selectedTab: Int = 0
     @Published var selectedCategory: String = "Notfallbehandlung"
     @Published var activeSheet: AppSheet?
     @Published private(set) var hasSeenTour = UserDefaults.standard.bool(forKey: "hasSeenTour")

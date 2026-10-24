@@ -8,40 +8,38 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            ZStack(alignment: .bottom) {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        TopBarView()
-                        SearchBarView()
-                        CategoryPillsView(state: state)
-                        HeroBannerView()
-                        NavigationLink(destination: ModelOverviewView()){
-                            Modell3DButtonView()
-                        }
-                        .padding(.horizontal, 16)
-                        CasesSectionView(state: state)
-                        Spacer(minLength: 120)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    TopBarView()
+                    SearchBarView()
+                    CategoryPillsView(state: state)
+                    HeroBannerView()
+                    NavigationLink(destination: ModelOverviewView()){
+                        Modell3DButtonView()
                     }
+                    .padding(.horizontal, 16)
+                    CasesSectionView(state: state)
+                    Spacer(minLength: 24)
                 }
-                BottomNavView(state: state)
             }
             .background(Color(hex: "F9FAFB"))
-            .ignoresSafeArea(edges: .bottom)
-            .sheet(item: $state.activeSheet) { sheet in
-                switch sheet {
-                case .avatar:
-                    AvatarSheetView()
-                        .presentationDetents([.fraction(0.55)])
-                        .presentationCornerRadius(24)
-                case .profile:
-                    ProfileSheetView()
-                case .ranking:
-                    LeaderboardView()
-                case .tour:
-                    AppTourView()
-                case .drLukasChat:
-                    DrLukasChatView(mode: .ask(nil), greetingName: backend.profile?.nickname)
-                }
+            .withBottomNav(isHome: true)
+        }
+        // Sheets am NavigationStack, damit sie auch aus einem Fall heraus aufgehen
+        .sheet(item: $state.activeSheet) { sheet in
+            switch sheet {
+            case .avatar:
+                AvatarSheetView()
+                    .presentationDetents([.fraction(0.55)])
+                    .presentationCornerRadius(24)
+            case .profile:
+                ProfileSheetView()
+            case .ranking:
+                LeaderboardView()
+            case .tour:
+                AppTourView()
+            case .drLukasChat:
+                DrLukasChatView(mode: .ask(nil), greetingName: backend.profile?.nickname)
             }
         }
         .environmentObject(navState)

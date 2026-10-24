@@ -161,6 +161,6 @@ struct CaseDetailView: View {
         .navigationTitle(patientCase.title)
         .navigationBarTitleDisplayMode(.inline)
         .background(Color(hex: "F9FAFB"))
-        .withPersistentBottomBar()
+        .withBottomNav()
     }
 }
