@@ -1,4 +1,6 @@
 import SwiftUI
+import QuickLook
+import ARKit
 
 // ─────────────────────────────────────────────
 // MARK: - DETAIL-ANSICHT
@@ -6,7 +8,7 @@ import SwiftUI
 
 struct ModelDetailView: View {
     let modell: ZahnModell
-    @State private var showQuickLook = false
+    @State private var arPreviewURL: URL?
     @State private var modelLoaded = false
     @State private var modelError = false
 
@@ -54,10 +56,10 @@ struct ModelDetailView: View {
             .frame(height: 340)
 
             // Steuer-Hinweise
-            HStack(spacing: 20) {
+            HStack(spacing: 16) {
                 Label("Drehen", systemImage: "hand.draw")
                 Label("Zoomen", systemImage: "arrow.up.left.and.arrow.down.right")
-                Label("Schieben", systemImage: "hand.point.up.left")
+                Label("Doppeltippen: zurück", systemImage: "arrow.counterclockwise")
             }
             .font(.system(size: 12))
             .foregroundColor(Color(hex: "6B7280"))
@@ -74,7 +76,7 @@ struct ModelDetailView: View {
                             Text(modell.name)
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(Color(hex: "0B1C30"))
-                            Text("Fall 1 · Kavitätenpräparation")
+                            Text("Fall 1 · Volksfest-Unfall (Frontzahntrauma)")
                                 .font(.system(size: 14))
                                 .foregroundColor(Color(hex: "6B7280"))
                         }
@@ -98,12 +100,12 @@ struct ModelDetailView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
 
                     // AR-Button — nur anzeigen wenn Datei vorhanden
-                    if usdzURL != nil {
-                        Button(action: { showQuickLook = true }) {
+                    if let url = usdzURL {
+                        Button(action: { arPreviewURL = url }) {
                             HStack(spacing: 10) {
                                 Image(systemName: "arkit")
                                     .font(.system(size: 16))
-                                Text("In AR ansehen (iPhone)")
+                                Text(supportsAR ? "In AR ansehen" : "In 3D-Vorschau öffnen")
                                     .font(.system(size: 15, weight: .semibold))
                             }
                             .foregroundColor(.white)
@@ -112,11 +114,12 @@ struct ModelDetailView: View {
                             .background(Color(hex: "084B83"))
                             .clipShape(RoundedRectangle(cornerRadius: 14))
                         }
-                        .sheet(isPresented: $showQuickLook) {
-                            if let url = usdzURL {
-                                QuickLookView(url: url)
-                            }
-                        }
+
+                        Text(supportsAR
+                             ? "Das Modell erscheint in Originalgröße (ca. 7–8 cm) auf einer Tischfläche. Mit zwei Fingern kannst du es vergrößern und drehen."
+                             : "AR funktioniert nur auf einem echten iPhone oder iPad. Hier öffnet sich stattdessen die 3D-Vorschau.")
+                            .font(.system(size: 12))
+                            .foregroundColor(Color(hex: "6B7280"))
                     }
                 }
                 .padding(16)
@@ -126,5 +129,9 @@ struct ModelDetailView: View {
         .navigationTitle(modell.name)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(false)
+        // Apple AR Quick Look: auf dem iPhone mit Umschalter "Objekt" / "AR"
+        .quickLookPreview($arPreviewURL)
     }
+
+    private var supportsAR: Bool { ARWorldTrackingConfiguration.isSupported }
 }
