@@ -33,6 +33,7 @@ struct ContentView: View {
             }
         }
         .environmentObject(navState)
+        .environmentObject(state)
         .id(navState.rootID)
     }
 }

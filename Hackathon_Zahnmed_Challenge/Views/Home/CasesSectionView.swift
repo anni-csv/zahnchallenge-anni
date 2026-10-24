@@ -25,7 +25,7 @@ struct CasesSectionView: View {
                 HStack(spacing: 12) {
                     ForEach(state.cases) { patientCase in
                         NavigationLink(destination: CaseDetailView(patientCase: patientCase)) {
-                            CaseCardView(patientCase: patientCase)
+                            CaseCardView(patientCase: patientCase, isCompleted: state.isCompleted(patientCase))
                         }
                         .buttonStyle(PlainButtonStyle())
                     }

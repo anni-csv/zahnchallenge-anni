@@ -13,12 +13,22 @@ struct CaseDetailView: View {
                     LinearGradient(colors: [patientCase.gradientStart, patientCase.gradientEnd],
                                    startPoint: .topLeading, endPoint: .bottomTrailing)
                     .frame(height: 200).clipShape(RoundedRectangle(cornerRadius: 20))
-                    Image(systemName: patientCase.sfSymbol)
-                        .font(.system(size: 72, weight: .light))
-                        .foregroundColor(.white.opacity(0.6))
-                        .frame(maxWidth: .infinity, alignment: .center).padding(.bottom, 30)
+                    if let image = patientCase.patient.image {
+                        Image(image)
+                            .resizable().scaledToFill()
+                            .frame(height: 200).frame(maxWidth: .infinity)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .overlay(LinearGradient(colors: [.clear, .black.opacity(0.45)],
+                                                    startPoint: .center, endPoint: .bottom)
+                                .clipShape(RoundedRectangle(cornerRadius: 20)))
+                    } else {
+                        Image(systemName: patientCase.sfSymbol)
+                            .font(.system(size: 72, weight: .light))
+                            .foregroundColor(.white.opacity(0.6))
+                            .frame(maxWidth: .infinity, alignment: .center).padding(.bottom, 30)
+                    }
                     HStack {
-                        Label("Notfall", systemImage: "exclamationmark.triangle.fill")
+                        Label(patientCase.appearance.headerLabel, systemImage: patientCase.appearance.headerIcon)
                             .font(.system(size: 11, weight: .bold)).foregroundColor(.white)
                             .padding(.horizontal, 10).padding(.vertical, 5)
                             .background(Color.red.opacity(0.85)).clipShape(Capsule())
@@ -44,16 +54,23 @@ struct CaseDetailView: View {
                         Image(systemName: "person.circle.fill")
                             .foregroundColor(Color(hex: "084B83")).font(.system(size: 20))
                         VStack(alignment: .leading) {
-                            Text("Ignaz Grünzinger")
+                            Text(patientCase.patient.name)
                                 .font(.system(size: 17, weight: .bold)).foregroundColor(Color(hex: "084B83"))
-                            Text("23 Jahre | Maurergeselle")
+                            Text(patientCase.patient.details)
                                 .font(.system(size: 12)).foregroundColor(Color(hex: "6B7280"))
                         }
                     }
                     Divider()
-                    Text("\"Ich bin über eine Gehwegplatte gestolpert und mit dem Gesicht gegen einen Blumentopf gefallen. Sofort spürte ich starken Schmerz in den Schneidezähnen.\"")
-                        .font(.system(size: 14)).foregroundColor(Color(hex: "374151"))
-                        .italic().lineSpacing(4)
+                    if let intro = patientCase.patient.intro {
+                        Text(intro)
+                            .font(.system(size: 14)).foregroundColor(Color(hex: "374151"))
+                            .lineSpacing(4)
+                    }
+                    if let quote = patientCase.patient.quote {
+                        Text("„\(quote)“")
+                            .font(.system(size: 14)).foregroundColor(Color(hex: "374151"))
+                            .italic().lineSpacing(4)
+                    }
                 }
                 .padding(16).background(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
@@ -62,9 +79,9 @@ struct CaseDetailView: View {
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
-                        Label("Notdienst 23:00", systemImage: "clock.fill")
-                        Label("Obere Schneidezähne", systemImage: "mouth.fill")
-                        Label("Rettungsdienst", systemImage: "cross.fill")
+                        ForEach(patientCase.tags, id: \.self) { tag in
+                            Label(tag.label, systemImage: tag.icon)
+                        }
                     }
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(Color(hex: "084B83")).padding(.horizontal, 16)
@@ -76,10 +93,7 @@ struct CaseDetailView: View {
                         .foregroundColor(Color(hex: "084B83")).padding(.horizontal, 16)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 8) {
-                            ForEach(Array([
-                                "Anamnese","Konsilium","Aufbewahrung",
-                                "Untersuchung","Diagnose","Therapie","MCQ","Upload"
-                            ].enumerated()), id: \.0) { i, step in
+                            ForEach(Array(patientCase.steps.enumerated()), id: \.element.id) { i, step in
                                 VStack(spacing: 4) {
                                     Circle()
                                         .fill(i == 0 ? Color(hex: "084B83") : Color(hex: "E5E7EB"))
@@ -89,7 +103,7 @@ struct CaseDetailView: View {
                                                 .font(.system(size: 11, weight: .bold))
                                                 .foregroundColor(i == 0 ? .white : Color(hex: "9CA3AF"))
                                         )
-                                    Text(step).font(.system(size: 9))
+                                    Text(step.label).font(.system(size: 9))
                                         .foregroundColor(i == 0 ? Color(hex: "084B83") : Color(hex: "9CA3AF"))
                                 }
                             }
@@ -98,7 +112,7 @@ struct CaseDetailView: View {
                     }
                 }
 
-                NavigationLink(destination: Step1FreeTextView()) {
+                NavigationLink(destination: CaseRunnerView(patientCase: patientCase)) {
                     Text("Fall starten")
                         .font(.system(size: 16, weight: .bold)).foregroundColor(.white)
                         .frame(maxWidth: .infinity).padding(.vertical, 16)

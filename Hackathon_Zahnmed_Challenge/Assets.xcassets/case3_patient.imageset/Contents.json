@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "case3_patient.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
