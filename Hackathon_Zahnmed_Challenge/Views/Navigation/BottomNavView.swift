@@ -59,6 +59,8 @@ struct BottomNavView: View {
             .buttonStyle(PlainButtonStyle())
             .accessibilityLabel("Dr. Lukas")
         }
+        // Symbole etwas tiefer setzen, die Leiste selbst bleibt gleich hoch
+        .offset(y: 10)
         .padding(.horizontal, 8)
         .padding(.top, 6)
         .padding(.bottom, 2)
