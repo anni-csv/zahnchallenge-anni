@@ -18,7 +18,7 @@ struct BottomNavView: View {
                 .clipShape(Capsule())
             }
             Spacer()
-            Button(action: { state.selectedTab = 1 }) {
+            Button(action: { state.activeSheet = .ranking }) {
                 VStack(spacing: 4) {
                     Image(systemName: "trophy.fill").font(.system(size: 20))
                     Text("Ranking").font(.system(size: 10, weight: .medium))
@@ -31,7 +31,7 @@ struct BottomNavView: View {
             }
             Spacer()
             ZStack(alignment: .top) {
-                Button(action: { state.showAvatarSheet = true }) {
+                Button(action: { state.activeSheet = .avatar }) {
                     ZStack(alignment: .topTrailing) {
                         Circle()
                             .fill(Color(hex: "084B83"))

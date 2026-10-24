@@ -59,3 +59,30 @@ Jede Migrationsdatei wird **genau einmal** ausgeführt. Ein zweites Mal ergibt F
 | Publishable key (`sb_publishable_…`, früher „anon“) | in der App | nein, Schutz läuft über RLS |
 | Secret key (`sb_secret_…`, früher „service_role“) | **nur** Server / Edge Functions | **ja, niemals in App, Chat oder GitHub** |
 | Database Password | Passwort-Manager | **ja** |
+
+## App-Anbindung
+
+- Paket: [`supabase-swift`](https://github.com/supabase/supabase-swift) (Swift Package, Produkt `Supabase`, nur im App-Target)
+- `Services/Supabase/SupabaseConfig.swift`: Project URL + Publishable Key
+- `Services/Supabase/BackendService.swift`: Anmeldung, Profil, Ergebnisse speichern, Ranking
+- `Services/Supabase/BackendModels.swift`: Abbild der Tabellen
+
+### Anmeldung: zunächst anonym
+
+Beim ersten Start meldet sich die App automatisch **anonym** an. Ohne Login-Hürde wird der Fortschritt sofort gespeichert, und man kann einen Nickname fürs Ranking wählen.
+Später wird das anonyme Konto mit einer E-Mail-Adresse verknüpft (gleiche Nutzer-ID, nichts geht verloren). Siehe #10.
+
+Voraussetzung im Dashboard: **Authentication → Sign In / Providers → „Allow anonymous sign-ins“ aktivieren.**
+
+Einschränkung: Wird die App gelöscht, ist ein anonymes Konto nicht wiederherstellbar.
+
+### Was gespeichert wird
+
+| Wann | Was |
+|---|---|
+| App-Start | anonyme Anmeldung, Profil laden |
+| Profil → Sichern | Nickname, „Im Ranking anzeigen“ |
+| Fall abgeschlossen | `case_attempts` (Punkte gesamt) + `step_results` (Punkte je Schritt) |
+| Ranking öffnen | `get_leaderboard()` |
+
+Ohne Internet funktioniert die App weiter. Dann wird nur nichts gespeichert, Fehler stehen in der Xcode-Konsole (Kategorie „Backend“).

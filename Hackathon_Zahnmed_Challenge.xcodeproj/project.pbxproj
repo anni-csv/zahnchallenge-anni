@@ -10,6 +10,7 @@
 		408F48252FC1C69900046CA1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408F48242FC1C69800046CA1 /* WidgetKit.framework */; };
 		408F48272FC1C69900046CA1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408F48262FC1C69900046CA1 /* SwiftUI.framework */; };
 		408F48382FC1C69A00046CA1 /* Fall1WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 408F48222FC1C69800046CA1 /* Fall1WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5B5A00012FD0000000000001 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 5B5A00022FD0000000000002 /* Supabase */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B5A00012FD0000000000001 /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +141,7 @@
 			);
 			name = Hackathon_Zahnmed_Challenge;
 			packageProductDependencies = (
+				5B5A00022FD0000000000002 /* Supabase */,
 			);
 			productName = Hackathon_Zahnmed_Challenge;
 			productReference = 29067EB32FBF9C0D00825650 /* Hackathon_Zahnmed_Challenge.app */;
@@ -193,6 +196,9 @@
 			);
 			mainGroup = 29067EAA2FBF9C0D00825650;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5B5A00032FD0000000000003 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 29067EB42FBF9C0D00825650 /* Products */;
 			projectDirPath = "";
@@ -525,6 +531,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5B5A00032FD0000000000003 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5B5A00022FD0000000000002 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5B5A00032FD0000000000003 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 29067EAB2FBF9C0D00825650 /* Project object */;
 }

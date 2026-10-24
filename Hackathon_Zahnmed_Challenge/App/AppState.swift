@@ -1,11 +1,17 @@
 import SwiftUI
 import Combine
 
+// MARK: - APP SHEETS
+enum AppSheet: String, Identifiable {
+    case avatar, profile, ranking
+    var id: String { rawValue }
+}
+
 // MARK: - APP STATE
 class AppState: ObservableObject {
     @Published var selectedTab: Int = 0
     @Published var selectedCategory: String = "Notfallbehandlung"
-    @Published var showAvatarSheet: Bool = false
+    @Published var activeSheet: AppSheet?
     @Published var userScore: Int = UserDefaults.standard.integer(forKey: "userScore")
     @Published private(set) var completedCaseIDs: Set<String> = []
 

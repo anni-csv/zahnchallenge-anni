@@ -4,6 +4,7 @@ import SwiftUI
 struct CaseCompletedView: View {
     @EnvironmentObject var navState: NavState
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var backend: BackendService
     @ObservedObject var session: CaseSession
     @State private var didSaveResult = false
 
@@ -77,6 +78,7 @@ struct CaseCompletedView: View {
             didSaveResult = true
             appState.addPoints(session.totalScore)
             appState.markCompleted(session.patientCase)
+            Task { await backend.saveCompletedCase(session) }
         }
     }
 }
