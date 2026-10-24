@@ -335,35 +335,49 @@ struct BottomNavView: View {
                     Text("Ranking").font(.system(size: 10, weight: .medium))
                 }
                 .foregroundColor(state.selectedTab == 1 ? Color(hex: "084B83") : Color(hex: "9CA3AF"))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 6)
+                .background(state.selectedTab == 1 ? Color(hex: "C9F0FF") : .clear)
+                .clipShape(Capsule())
             }
             Spacer()
             ZStack(alignment: .top) {
-                Button(action: { state.selectedTab = 2 }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "bubble.left.fill").font(.system(size: 20))
-                        Text("Chat").font(.system(size: 10, weight: .medium))
-                    }
-                    .foregroundColor(state.selectedTab == 2 ? Color(hex: "084B83") : Color(hex: "9CA3AF"))
-                }
-                .padding(.top, 30)
-
                 Button(action: { state.showAvatarSheet = true }) {
                     ZStack(alignment: .topTrailing) {
                         Circle()
                             .fill(Color(hex: "084B83"))
                             .frame(width: 50, height: 50)
-                            .shadow(color: Color(hex: "084B83").opacity(0.35), radius: 8, y: 3)
-                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                            .overlay(
-                                Image("dr_lukas").resizable().scaledToFill()
-                                    .frame(width: 46, height: 46).clipShape(Circle())
+                            .shadow(
+                                color: Color(hex: "084B83").opacity(0.35),
+                                radius: 8,
+                                y: 3
                             )
-                        Circle().fill(Color.red).frame(width: 16, height: 16)
-                            .overlay(Text("1").font(.system(size: 9, weight: .bold)).foregroundColor(.white))
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 3)
+                            )
+                            .overlay(
+                                Image("dr_lukas")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .offset(x: 1, y: 1.5)
+                                    .frame(width: 38, height: 38)
+                                    .clipShape(Circle())
+                            )
+
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 18, height: 18)
+                            .overlay(
+                                Text("1")
+                                    .font(.system(size: 10, weight: .bold))
+                                    .foregroundColor(.white)
+                            )
                             .offset(x: 2, y: -2)
                     }
                 }
-                .offset(y: -28)
+                .buttonStyle(PlainButtonStyle())
+                .offset(y: 0)
             }
             Spacer()
         }
@@ -771,7 +785,6 @@ struct Step1FreeTextView: View {
         "untersuch", "schmerz", "blutung", "kopf",
         "zahn", "fraktur", "avulsion", "sturz", "fragen", "ct", "mrt"
     ]
-
     private var wordCount: Int {
         inputText.split(whereSeparator: \.isWhitespace).count
     }
