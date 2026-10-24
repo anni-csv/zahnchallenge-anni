@@ -10,6 +10,7 @@ struct ProfileSheetView: View {
     @State private var showInRanking = true
     @State private var isSaving = false
     @State private var errorMessage: String?
+    @State private var confirmReset = false
 
     private var trimmedNickname: String {
         nickname.trimmingCharacters(in: .whitespaces)
@@ -44,6 +45,8 @@ struct ProfileSheetView: View {
                     LabeledContent("Punkte", value: "\(appState.userScore)")
                     LabeledContent("Abgeschlossene Fälle",
                                    value: "\(appState.completedCaseIDs.count) / \(appState.cases.count)")
+                    Button("Fortschritt zurücksetzen", role: .destructive) { confirmReset = true }
+                        .disabled(appState.completedCaseIDs.isEmpty)
                 }
 
                 Section {
@@ -51,6 +54,12 @@ struct ProfileSheetView: View {
                 } footer: {
                     Text("Dein Fortschritt wird anonym gespeichert. Anmeldung per E-Mail folgt, damit du ihn auf andere Geräte mitnehmen kannst.")
                 }
+            }
+            .confirmationDialog("Gesamten Fortschritt zurücksetzen?",
+                                isPresented: $confirmReset, titleVisibility: .visible) {
+                Button("Alle Fälle zurücksetzen", role: .destructive) { appState.resetAllProgress() }
+            } message: {
+                Text("Alle Fälle werden wieder als offen angezeigt. Deine Ergebnisse im Ranking bleiben erhalten.")
             }
             .navigationTitle("Profil")
             .navigationBarTitleDisplayMode(.inline)

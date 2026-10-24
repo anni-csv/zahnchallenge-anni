@@ -35,6 +35,11 @@ struct CaseCompletedView: View {
                     Text("Punkte")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color(hex: "6B7280"))
+                    if let best = appState.bestScore(for: session.patientCase), best > session.totalScore {
+                        Text("Dein Bestes: \(best)")
+                            .font(.system(size: 12))
+                            .foregroundColor(Color(hex: "6B7280"))
+                    }
                 }
                 .padding(.horizontal, 32).padding(.vertical, 14)
                 .background(Color(hex: "C9F0FF"))
@@ -65,8 +70,16 @@ struct CaseCompletedView: View {
                     .padding(.horizontal, 16)
                 }
 
-                Button(action: navState.goHome) {
-                    confirmButtonLabel(title: "Zur Startseite", icon: "house.fill")
+                VStack(spacing: 12) {
+                    Button(action: session.restart) {
+                        confirmButtonLabel(title: "Fall wiederholen", icon: "arrow.counterclockwise")
+                    }
+                    Button(action: navState.goHome) {
+                        Label("Zur Startseite", systemImage: "house.fill")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(Color(hex: "084B83"))
+                            .padding(.vertical, 10)
+                    }
                 }
                 .padding(.horizontal, 16)
 
@@ -76,8 +89,7 @@ struct CaseCompletedView: View {
         .onAppear {
             guard !didSaveResult else { return }
             didSaveResult = true
-            appState.addPoints(session.totalScore)
-            appState.markCompleted(session.patientCase)
+            appState.recordCompletion(session.patientCase, score: session.totalScore)
             Task { await backend.saveCompletedCase(session) }
         }
     }

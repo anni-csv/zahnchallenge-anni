@@ -4,7 +4,11 @@ import SwiftUI
 struct CaseDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var navState: NavState
+    @EnvironmentObject private var appState: AppState
+    @State private var confirmReset = false
     let patientCase: PatientCase
+
+    private var isCompleted: Bool { appState.isCompleted(patientCase) }
 
     var body: some View {
         ScrollView {
@@ -112,16 +116,47 @@ struct CaseDetailView: View {
                     }
                 }
 
+                if isCompleted {
+                    HStack {
+                        Label("Abgeschlossen", systemImage: "checkmark.seal.fill")
+                            .foregroundColor(Color(hex: "166534"))
+                        Spacer()
+                        Text("Bestes Ergebnis: \(appState.bestScore(for: patientCase) ?? 0) / \(patientCase.maxScore)")
+                            .foregroundColor(Color(hex: "374151"))
+                    }
+                    .font(.system(size: 13, weight: .semibold))
+                    .padding(14)
+                    .background(Color(hex: "CAFFBF").opacity(0.5))
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                    .padding(.horizontal, 16)
+                }
+
                 NavigationLink(destination: CaseRunnerView(patientCase: patientCase)) {
-                    Text("Fall starten")
+                    Text(isCompleted ? "Fall erneut starten" : "Fall starten")
                         .font(.system(size: 16, weight: .bold)).foregroundColor(.white)
                         .frame(maxWidth: .infinity).padding(.vertical, 16)
                         .background(Color(hex: "084B83")).clipShape(RoundedRectangle(cornerRadius: 16))
                         .shadow(color: Color(hex: "084B83").opacity(0.3), radius: 8, y: 4)
                 }
-                .padding(.horizontal, 16).padding(.bottom, 30)
+                .padding(.horizontal, 16).padding(.bottom, isCompleted ? 0 : 30)
+
+                if isCompleted {
+                    Button(action: { confirmReset = true }) {
+                        Label("Fortschritt zurücksetzen", systemImage: "arrow.counterclockwise")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(Color(hex: "6B7280"))
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding(.bottom, 30)
+                }
             }
             .padding(.top, 16)
+        }
+        .confirmationDialog("Fortschritt für diesen Fall zurücksetzen?",
+                            isPresented: $confirmReset, titleVisibility: .visible) {
+            Button("Zurücksetzen", role: .destructive) { appState.resetProgress(for: patientCase) }
+        } message: {
+            Text("Der Fall wird wieder als offen angezeigt. Dein Ergebnis im Ranking bleibt erhalten.")
         }
         .navigationTitle(patientCase.title)
         .navigationBarTitleDisplayMode(.inline)
