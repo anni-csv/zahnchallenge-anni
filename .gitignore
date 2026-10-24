@@ -1,14 +1,32 @@
 # macOS
 .DS_Store
 
-# Xcode
+# Xcode – Build-Output & persönliche Einstellungen
 build/
 DerivedData/
-*.xcuserstate
 xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
 
-# Gemini API-Key (niemals committen)
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Export / Archive
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Secrets – niemals committen
 GenerativeAI-Info.plist
+Secrets.xcconfig
+*.env
+.env*
+
+# Supabase (lokale CLI-Daten)
+supabase/.branches/
+supabase/.temp/
 
 # Sonstiges
 *.log
