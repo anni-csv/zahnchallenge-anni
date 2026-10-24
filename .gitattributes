@@ -1,0 +1,4 @@
+# Binärdateien nicht diffen oder Zeilenenden umwandeln
+*.usdz binary
+*.png  binary
+*.jpg  binary
