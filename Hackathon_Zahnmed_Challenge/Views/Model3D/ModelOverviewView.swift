@@ -9,19 +9,19 @@ struct ModelOverviewView: View {
     let modelle: [ZahnModell] = [
         ZahnModell(id: 1,
                    name: "Ausgangsbefund",
-                   beschreibung: "Zustand vor der Behandlung",
+                   beschreibung: "Zustand nach dem Unfall",
                    dateiname: "Hackathon_Fall1",
                    farbe: "084B83",
                    icon: "magnifyingglass.circle.fill"),
         ZahnModell(id: 2,
                    name: "Fehlerhafte Versorgung",
-                   beschreibung: "Typische Behandlungsfehler erkennen",
+                   beschreibung: "Fehler bei Reposition und Schienung erkennen",
                    dateiname: "Hackathon_Fall1_Fehlerhaft",
                    farbe: "C0392B",
                    icon: "xmark.circle.fill"),
         ZahnModell(id: 3,
                    name: "Korrekte Versorgung",
-                   beschreibung: "Optimales Behandlungsergebnis",
+                   beschreibung: "Reposition und Titan-Trauma-Splint",
                    dateiname: "Hackathon_Fall1_Repariert",
                    farbe: "1A7A4A",
                    icon: "checkmark.circle.fill")
@@ -38,7 +38,7 @@ struct ModelOverviewView: View {
                     Text("3D Modelle")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(Color(hex: "0B1C30"))
-                    Text("Fall 1 · Kavitätenpräparation")
+                    Text("Fall 1 · Volksfest-Unfall (Frontzahntrauma)")
                         .font(.system(size: 15))
                         .foregroundColor(Color(hex: "6B7280"))
                 }
