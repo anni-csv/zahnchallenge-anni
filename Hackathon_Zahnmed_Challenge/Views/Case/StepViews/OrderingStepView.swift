@@ -60,7 +60,9 @@ struct OrderingStepView: View {
 
     private func submit() {
         score = StepScoring.ordering(current: items.map(\.label), correct: task.items, points: step.points)
-        session.record(score, for: step)
+        session.record(score, for: step,
+                       given: items.map(\.label).joined(separator: " → "),
+                       correct: task.items.joined(separator: " → "))
         withAnimation(.easeInOut) { submitted = true }
     }
 }

@@ -54,15 +54,18 @@ struct BottomNavView: View {
                                     .clipShape(Circle())
                             )
 
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 18, height: 18)
-                            .overlay(
-                                Text("1")
-                                    .font(.system(size: 10, weight: .bold))
-                                    .foregroundColor(.white)
-                            )
-                            .offset(x: 2, y: -2)
+                        // Hinweis-Punkt, bis die App-Tour einmal angesehen wurde
+                        if !state.hasSeenTour {
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 18, height: 18)
+                                .overlay(
+                                    Text("1")
+                                        .font(.system(size: 10, weight: .bold))
+                                        .foregroundColor(.white)
+                                )
+                                .offset(x: 2, y: -2)
+                        }
                     }
                 }
                 .buttonStyle(PlainButtonStyle())

@@ -57,7 +57,10 @@ struct ChoiceStepView: View {
 
     private func submit() {
         score = StepScoring.choice(selected: selected, correct: task.correct, points: step.points)
-        session.record(score, for: step)
+        let texts = task.options.map(\.text)
+        session.record(score, for: step,
+                       given: selected.sorted().map { texts[$0] }.joined(separator: ", "),
+                       correct: task.correct.sorted().map { texts[$0] }.joined(separator: ", "))
         withAnimation(.easeInOut) { submitted = true }
     }
 }

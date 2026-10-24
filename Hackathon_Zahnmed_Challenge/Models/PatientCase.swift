@@ -187,7 +187,7 @@ struct MatchingTask: Decodable {
     }
 }
 
-/// Foto-/Dokument-Upload. Mit `aiPrompt` wird das erste Bild von Gemini bewertet.
+/// Foto-/Dokument-Upload. Mit `aiPrompt` bewertet Dr. Lukas (KI) das erste Bild.
 struct UploadTask: Decodable {
     let minFiles: Int
     let maxFiles: Int
