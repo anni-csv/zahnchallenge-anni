@@ -3,6 +3,9 @@ import SwiftUI
 // MARK: - CASE CARD
 struct CaseCardView: View {
     let patientCase: PatientCase
+    let isCompleted: Bool
+
+    private var progress: Double { isCompleted ? 1 : 0 }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -14,20 +17,24 @@ struct CaseCardView: View {
                     .font(.system(size: 38, weight: .light))
                     .foregroundColor(.white.opacity(0.75))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                if let badge = patientCase.badge,
-                   let badgeBG = patientCase.badgeBG,
-                   let badgeText = patientCase.badgeText {
-                    Text(badge)
+                if isCompleted {
+                    Label("Abgeschlossen", systemImage: "checkmark.seal.fill")
                         .font(.system(size: 10, weight: .bold))
-                        .foregroundColor(badgeText)
+                        .foregroundColor(Color(hex: "166534"))
                         .padding(.horizontal, 8).padding(.vertical, 4)
-                        .background(badgeBG).clipShape(Capsule()).padding(8)
+                        .background(Color(hex: "CAFFBF")).clipShape(Capsule()).padding(8)
+                } else if let badge = patientCase.badge {
+                    Text(badge.text)
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(Color(hex: badge.foreground))
+                        .padding(.horizontal, 8).padding(.vertical, 4)
+                        .background(Color(hex: badge.background)).clipShape(Capsule()).padding(8)
                 }
             }
             .frame(height: 96)
 
             VStack(alignment: .leading, spacing: 5) {
-                Text(patientCase.category)
+                Text(patientCase.category.uppercased())
                     .font(.system(size: 10, weight: .bold))
                     .foregroundColor(Color(hex: "727781")).tracking(0.5)
                 Text(patientCase.title)
@@ -48,12 +55,12 @@ struct CaseCardView: View {
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 4).fill(Color(hex: "E5E7EB")).frame(height: 5)
                         RoundedRectangle(cornerRadius: 4).fill(Color(hex: "084B83"))
-                            .frame(width: max(geo.size.width * patientCase.progress, 0), height: 5)
+                            .frame(width: max(geo.size.width * progress, 0), height: 5)
                     }
                 }.frame(height: 5)
                 HStack {
                     Spacer()
-                    Text("\(Int(patientCase.progress * Double(patientCase.totalSteps))) / \(patientCase.totalSteps) Schritte")
+                    Text("\(Int(progress * Double(patientCase.totalSteps))) / \(patientCase.totalSteps) Schritte")
                         .font(.system(size: 10)).foregroundColor(Color(hex: "9CA3AF"))
                 }
             }

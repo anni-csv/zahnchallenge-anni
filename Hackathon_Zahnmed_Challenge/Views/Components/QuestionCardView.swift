@@ -7,7 +7,7 @@ struct QuestionCardView: View {
     let badgeColor: Color
     let typeLabel: String
     let question: String
-    let subtitle: String
+    let subtitle: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -26,8 +26,10 @@ struct QuestionCardView: View {
                 Text(question)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(Color(hex: "084b83")).lineSpacing(4)
-                Text(subtitle)
-                    .font(.system(size: 13)).foregroundColor(Color(hex: "424750"))
+                if let subtitle {
+                    Text(subtitle)
+                        .font(.system(size: 13)).foregroundColor(Color(hex: "424750"))
+                }
             }
             .padding(20).background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 20))

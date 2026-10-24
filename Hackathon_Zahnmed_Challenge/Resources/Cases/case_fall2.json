@@ -1,0 +1,236 @@
+{
+  "id": "fall2",
+  "order": 2,
+  "category": "Endodontie",
+  "title": "Schmerzen in der Nacht",
+  "difficulty": 3,
+  "difficultyLabel": "Schwer",
+  "appearance": {
+    "sfSymbol": "waveform.path.ecg",
+    "gradientStart": "C9F0FF",
+    "gradientEnd": "A5D8FF",
+    "starColor": "EF4444",
+    "headerLabel": "Notdienst",
+    "headerIcon": "moon.stars.fill"
+  },
+  "patient": {
+    "name": "Sibylle Lischkow",
+    "details": "51 Jahre",
+    "image": "case2_patient",
+    "intro": "Die 51-jährige Sibylle Lischkow kommt nachts um 2 Uhr in Ihren zahnärztlichen Notdienst. Sie klagt über heftige Schmerzen in den rechten Backenzähnen bis zum rechten Ohr. Auf Nachfrage nennt sie den vorletzten Zahn als mögliche Ursache. Seit einigen Wochen hatte sie dort erst leichte, dann immer stärkere Schmerzen bei heißen, kalten und vor allem süßen Speisen und Getränken. Zum Zahnarzt hat sie es aus Zeitgründen bisher nicht geschafft. Seit gestern Abend sind die Schmerzen um ein Vielfaches schlimmer, sie kann auf keinen Fall mehr auf den Zahn beißen. Nachts wurde es so schlimm, dass sie sich von ihrem Mann in den Notdienst der Uniklinik Regensburg fahren ließ."
+  },
+  "tags": [
+    {
+      "label": "Notdienst 02:00",
+      "icon": "clock.fill"
+    },
+    {
+      "label": "Unterkiefer rechts",
+      "icon": "mouth.fill"
+    },
+    {
+      "label": "Starke Schmerzen",
+      "icon": "bolt.fill"
+    }
+  ],
+  "steps": [
+    {
+      "id": "f2-untersuchung",
+      "type": "multipleChoice",
+      "label": "Untersuchung",
+      "badge": {
+        "text": "Untersuchung",
+        "icon": "eye",
+        "color": "B5EAD7"
+      },
+      "question": "Welche Untersuchungen sollten Sie an dem mutmaßlich ursächlichen Zahn 46 vornehmen?",
+      "instruction": "Mehrere Antworten sind möglich.",
+      "points": 10,
+      "options": [
+        "Vitalitätsprobe",
+        "Perkussion",
+        "Einzelzahn-Röntgen",
+        "DVT",
+        "Sondierung des Parodonts"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "reviewNote": "Lösung nicht im Handbuch – Vorschlag: ViPr, Perkussion, Einzelzahn-Röntgen (DVT nicht indiziert). Sondierung bitte fachlich prüfen."
+    },
+    {
+      "id": "f2-befund",
+      "type": "singleChoice",
+      "label": "Befund",
+      "badge": {
+        "text": "Befund",
+        "icon": "waveform.path.ecg",
+        "color": "C9F0FF"
+      },
+      "question": "Welche Ergebnisse der Vitalitäts- und Perkussionsprobe erwarten Sie bei dem Zahn 46?",
+      "instruction": "Eine Antwort ist richtig.",
+      "points": 10,
+      "options": [
+        "ViPr ++, Perk ++",
+        "ViPr –, Perk +",
+        "ViPr ++, Perk –",
+        "ViPr –, Perk –"
+      ],
+      "correct": [
+        0
+      ],
+      "reviewNote": "Lösung nicht im Handbuch – Vorschlag: ViPr ++, Perk ++ (akute Pulpitis, Aufbissschmerz). Unbedingt fachlich prüfen."
+    },
+    {
+      "id": "f2-roentgen",
+      "type": "singleChoice",
+      "label": "Röntgen",
+      "badge": {
+        "text": "Bildauswahl",
+        "icon": "rays",
+        "color": "FFD6A5"
+      },
+      "question": "Welches der zwei Röntgenbilder passt am ehesten zur Symptomatik und zu den bisherigen Untersuchungsergebnissen der Patientin?",
+      "instruction": "Tippen Sie auf das Lupen-Symbol, um ein Bild zu vergrößern.",
+      "points": 10,
+      "options": [
+        {
+          "text": "Bissflügelaufnahme rechts",
+          "image": "case2_xray_bitewing"
+        },
+        {
+          "text": "Einzelzahnfilm 46",
+          "image": "case2_xray_periapical_46"
+        }
+      ],
+      "correct": [
+        1
+      ]
+    },
+    {
+      "id": "f2-diagnose-therapie",
+      "type": "singleChoice",
+      "label": "Diagnose",
+      "badge": {
+        "text": "Diagnose & Therapie",
+        "icon": "stethoscope",
+        "color": "FFD6A5"
+      },
+      "question": "Welche Kombination aus Diagnose und Therapie passt am besten zu diesem Fall?",
+      "instruction": "Eine Antwort ist richtig.",
+      "expertComment": "Bei einer akuten Pulpitis ist das apikale Parodont noch nicht beteiligt. Nach Abklingen der akuten Pulpitis formiert sich jedoch fast immer eine apikale Granulation – die ViPr ist dann bereits negativ. Aus dieser Granulation kann eine apikale Zyste entstehen, die zu einer Abszedierung mit Fistelbildung führen kann. Patienten sind dann meist beschwerdefrei oder klagen nur über leichte Aufbissempfindlichkeit und ggf. Eiteraustritt. Seien Sie dann konsequent bei der chirurgischen Sanierung (Inzision, WKB) und nötigenfalls einer adjuvanten oralen Antibiose, vor allem bei Tendenz zur Ausbreitung des Abszesses! Die alleinige Gabe von Antibiotika wird von Patienten häufig nachgefragt und verschafft kurzfristige Linderung, behebt das zugrundeliegende Problem jedoch nicht und hat sogar riskante Folgen für den Gesamtorganismus.",
+      "points": 10,
+      "options": [
+        "Caries profunda mit akuter Pulpitis → Wurzelbehandlung mit medikamentöser Einlage und provisorischem Verschluss",
+        "Apikaler Abszess → Verordnung von 600 mg Clindamycin für 7 Tage",
+        "Pulpanekrose durch okklusales Trauma → Definitive Versorgung mit adhäsiver Füllung",
+        "Caries profunda mit akuter Pulpitis → Verordnung von 600 mg Clindamycin für 7 Tage"
+      ],
+      "correct": [
+        0
+      ],
+      "reviewNote": "Im Handbuch als Diagnose-/Therapie-Tabelle; hier als Kombinations-Single-Choice umgesetzt."
+    },
+    {
+      "id": "f2-einlage",
+      "type": "singleChoice",
+      "label": "Einlage",
+      "badge": {
+        "text": "Therapie",
+        "icon": "pills.fill",
+        "color": "CAFFBF"
+      },
+      "question": "Welche medikamentöse Einlage wählen Sie für die Akutbehandlung?",
+      "instruction": "Eine Antwort ist richtig.",
+      "expertComment": "Calciumhydroxid kann bei Vorliegen von Kontraindikationen ebenfalls verwendet werden, ist jedoch nicht erste Wahl.",
+      "points": 10,
+      "options": [
+        "Ledermix",
+        "MTA",
+        "Calciumhydroxid",
+        "Aureomycin"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "id": "f2-kontraindikation",
+      "type": "multipleChoice",
+      "label": "Kontraindikation",
+      "badge": {
+        "text": "Pharmakologie",
+        "icon": "exclamationmark.shield.fill",
+        "color": "FFD6A5"
+      },
+      "question": "Was sind Kontraindikationen für die Anwendung von Ledermix?",
+      "instruction": "Mehrere Antworten sind möglich.",
+      "points": 10,
+      "options": [
+        "Schwangerschaft",
+        "Allergie gegen Tetracycline",
+        "Morbus Crohn",
+        "Hypertonie"
+      ],
+      "correct": [
+        0,
+        1
+      ],
+      "reviewNote": "Lösung nicht im Handbuch – Vorschlag: Schwangerschaft, Tetracyclin-Allergie. Bitte prüfen."
+    },
+    {
+      "id": "f2-bema",
+      "type": "multipleChoice",
+      "label": "Abrechnung",
+      "badge": {
+        "text": "Abrechnung",
+        "icon": "doc.text.fill",
+        "color": "C9F0FF"
+      },
+      "question": "Welche Abrechnungspositionen nach BEMA können Sie nach der Behandlung in der Akte eintragen?",
+      "instruction": "Mehrere Antworten sind möglich.",
+      "points": 15,
+      "options": [
+        "Ä1",
+        "ViPr",
+        "Rö2",
+        "3× VitE",
+        "3× WK",
+        "3× WF",
+        "F2 (od)",
+        "bMF",
+        "Med",
+        "sK",
+        "Mu",
+        "Zu"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        8,
+        11
+      ],
+      "reviewNote": "Lösung nicht im Handbuch – Vorschlag: Ä1, ViPr, Rö2, 3× VitE, 3× WK, Med, Zu (Notdienst nachts). Unbedingt fachlich prüfen."
+    },
+    {
+      "id": "f2-upload",
+      "type": "upload",
+      "label": "Upload",
+      "badge": {
+        "text": "Dokumentation",
+        "icon": "camera.fill",
+        "color": "FFD6A5"
+      },
+      "question": "Laden Sie jetzt zwei Bilder Ihrer am 3D-Modell durchgeführten Behandlung hoch!",
+      "instruction": "Ein Bild muss ein Röntgenbild mit der Messaufnahme der Wurzelkanäle sein. Das zweite Bild soll den provisorischen Verschluss zeigen.",
+      "points": 0,
+      "minFiles": 2,
+      "maxFiles": 2
+    }
+  ]
+}

@@ -1,0 +1,264 @@
+{
+  "id": "fall3",
+  "order": 3,
+  "category": "Parodontologie",
+  "title": "Parodontitis-Erstuntersuchung",
+  "difficulty": 1,
+  "difficultyLabel": "Leicht",
+  "appearance": {
+    "sfSymbol": "magnifyingglass.circle.fill",
+    "gradientStart": "B5EAD7",
+    "gradientEnd": "CAFFBF",
+    "starColor": "10B981",
+    "headerLabel": "Erstuntersuchung",
+    "headerIcon": "person.badge.plus"
+  },
+  "badge": {
+    "text": "Neu",
+    "background": "DBEAFE",
+    "foreground": "1D4ED8"
+  },
+  "patient": {
+    "name": "Bernd Schweiger",
+    "details": "53 Jahre | Kaminkehrer",
+    "image": "case3_patient",
+    "intro": "Herr Schweiger kommt erstmals in Ihre Sprechstunde, um sich zahnärztlich untersuchen zu lassen. Er hat sein Gebiss lange vernachlässigt, ist aber stolz: Im Gegensatz zu vielen Kollegen und Freunden fehlen ihm noch keine Zähne, und er habe nur wenige „Plomben“ und „irgendwo eine Krone“. Beschwerden habe er keine, bemerkt jedoch seit Längerem etwas Blut beim Zähneputzen, und seine Frau hat schon mehrmals angemerkt, dass er Mundgeruch habe. Er führt dies auf seine Vorliebe für Knoblauch zurück. Außerdem rauche er gelegentlich. Er vermutet bei sich selbst keine größeren Probleme."
+  },
+  "tags": [
+    {
+      "label": "Erstbesuch",
+      "icon": "calendar"
+    },
+    {
+      "label": "Zahnfleischbluten",
+      "icon": "drop.fill"
+    },
+    {
+      "label": "Raucher",
+      "icon": "smoke.fill"
+    }
+  ],
+  "steps": [
+    {
+      "id": "f3-erstuntersuchung",
+      "type": "multipleChoice",
+      "label": "Untersuchung",
+      "badge": {
+        "text": "Untersuchung",
+        "icon": "eye",
+        "color": "B5EAD7"
+      },
+      "question": "Welche Untersuchungen bzw. Behandlungen sollten Sie zunächst bei dem Patienten durchführen?",
+      "instruction": "Mehrere Antworten sind möglich.",
+      "points": 10,
+      "options": [
+        "Anamnesebogen",
+        "01",
+        "üZ",
+        "OPG",
+        "N",
+        "PSI",
+        "Ekr",
+        "FU2",
+        "X3",
+        "ViPr",
+        "Medikamentenplan"
+      ],
+      "correct": [
+        0,
+        1,
+        3,
+        5,
+        9,
+        10
+      ],
+      "reviewNote": "Lösung nicht im Handbuch. Im Handbuch steht „üZ OPG“ – hier als zwei Optionen interpretiert. Vorschlag: Anamnesebogen, 01, OPG, PSI, ViPr, Medikamentenplan. Bitte prüfen."
+    },
+    {
+      "id": "f3-psi",
+      "type": "singleChoice",
+      "label": "PSI",
+      "badge": {
+        "text": "Befund",
+        "icon": "chart.bar.fill",
+        "color": "C9F0FF"
+      },
+      "context": "Sie betrachten das OPG, und die Untersuchung „PSI“ liefert folgenden Befund:",
+      "question": "Welche Diagnose ergibt sich aus dieser Untersuchung?",
+      "instruction": "Eine Antwort ist richtig.",
+      "media": {
+        "image": "case3_opg",
+        "caption": "OPG-Aufnahme"
+      },
+      "facts": [
+        {
+          "label": "S1",
+          "value": "3"
+        },
+        {
+          "label": "S2",
+          "value": "1"
+        },
+        {
+          "label": "S3",
+          "value": "1"
+        },
+        {
+          "label": "S6",
+          "value": "4"
+        },
+        {
+          "label": "S5",
+          "value": "4"
+        },
+        {
+          "label": "S4",
+          "value": "4"
+        }
+      ],
+      "drLukasHint": "Schauen Sie auf den höchsten Code pro Sextant: Ab welchem PSI-Wert besteht Behandlungsbedarf?",
+      "points": 10,
+      "options": [
+        "Parodontal gesund",
+        "Gingivitis",
+        "Verdacht auf Parodontitis"
+      ],
+      "correct": [
+        2
+      ]
+    },
+    {
+      "id": "f3-zahn33",
+      "type": "singleChoice",
+      "label": "Differenzial",
+      "badge": {
+        "text": "Diagnose",
+        "icon": "stethoscope",
+        "color": "FFD6A5"
+      },
+      "question": "Der Zahn 33 ist in der Vitalitätsprobe negativ. Welches damit assoziierte Krankheitsbild könnte in Zusammenhang mit der massiven Knochendestruktion in Regio 33–35 stehen?",
+      "instruction": "Eine Antwort ist richtig.",
+      "expertComment": "Ein Ameloblastom kann ebenfalls Knochen zerstören, wäre jedoch auf einem Röntgenbild erkennbar, da es röntgendichter erscheint.",
+      "points": 10,
+      "options": [
+        "Dentitio difficilis",
+        "Paro-Endo-Läsion",
+        "Ameloblastom"
+      ],
+      "correct": [
+        1
+      ]
+    },
+    {
+      "id": "f3-blutwert",
+      "type": "singleChoice",
+      "label": "Hausarzt",
+      "badge": {
+        "text": "Allgemeinmedizin",
+        "icon": "phone.fill",
+        "color": "C9F0FF"
+      },
+      "context": "Auf dem Anamnesebogen sehen Sie, dass der Patient an Diabetes leidet – das hat er Ihnen im Gespräch nicht mitgeteilt, er hielt es für den Zahnarzt unwichtig. Bei „Tabakkonsum“ hat er angegeben, dass er eine Schachtel Zigaretten täglich raucht. Sie entscheiden sich, einen Parodontalstatus zu erheben.",
+      "question": "Sie telefonieren mit dem Hausarzt des Patienten, um einen für Sie relevanten Blutwert zu erfragen. Welcher ist gemeint?",
+      "instruction": "Eine Antwort ist richtig.",
+      "points": 10,
+      "options": [
+        "HbA1c",
+        "Quick-Wert",
+        "TSH",
+        "Gamma-GT"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "id": "f3-medikamente",
+      "type": "multipleChoice",
+      "label": "Medikamente",
+      "badge": {
+        "text": "Pharmakologie",
+        "icon": "pills.fill",
+        "color": "FFD6A5"
+      },
+      "question": "Welche Medikamente stehen im Verdacht, die Entstehung von Parodontitis und Gingivitis zu begünstigen?",
+      "instruction": "Mehrere Antworten sind möglich.",
+      "expertComment": "Diverse neurologische und psychiatrische Medikamente führen zu einer Gingivahyperplasie und Mundtrockenheit, was insgesamt das Risiko für Zahnfleischentzündungen erhöht. Immunsuppressiva und lange andauernde Steroid-Behandlungen schwächen das Immunsystem und verschlimmern meist eine Parodontitis.",
+      "points": 10,
+      "options": [
+        "Antikoagulanzien",
+        "AT1-Hemmer",
+        "Antiepileptika",
+        "Antidepressiva",
+        "Immunsuppressiva"
+      ],
+      "correct": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "f3-parostatus",
+      "type": "upload",
+      "label": "PA-Status",
+      "badge": {
+        "text": "Dokumentation",
+        "icon": "doc.richtext.fill",
+        "color": "FFD6A5"
+      },
+      "question": "Vervollständigen Sie den Parodontalstatus und laden Sie ihn hier zur Überprüfung hoch.",
+      "instruction": "Fotografieren Sie das ausgefüllte Dokument „Parodontalstatus“.",
+      "points": 0,
+      "minFiles": 1,
+      "maxFiles": 2,
+      "reviewNote": "Das Dokument „Parodontalstatus“ zum Herunterladen fehlt noch in der App."
+    },
+    {
+      "id": "f3-par-start",
+      "type": "singleChoice",
+      "label": "PAR-Antrag",
+      "badge": {
+        "text": "Therapieplanung",
+        "icon": "list.number",
+        "color": "CAFFBF"
+      },
+      "question": "Sie beantragen für den Patienten eine PAR-Behandlung gemäß den Richtlinien. Womit beginnt eine derartige Behandlung immer?",
+      "instruction": "Eine Antwort ist richtig.",
+      "points": 10,
+      "options": [
+        "AIT",
+        "UPT",
+        "ATG",
+        "BEV"
+      ],
+      "correct": [
+        2
+      ],
+      "reviewNote": "Lösung nicht im Handbuch – Vorschlag: ATG (Aufklärungs- und Therapiegespräch). Bitte prüfen."
+    },
+    {
+      "id": "f3-antibiose",
+      "type": "singleChoice",
+      "label": "Antibiose",
+      "badge": {
+        "text": "Therapie",
+        "icon": "cross.vial.fill",
+        "color": "CAFFBF"
+      },
+      "context": "Aufgrund der Schwere der Erkrankung entschließen Sie sich zu einer adjuvanten Antibiotikatherapie.",
+      "question": "Welche Präparate sollten hierbei bevorzugt angewendet werden, und in welcher Dosierung?",
+      "instruction": "Eine Antwort ist richtig.",
+      "expertComment": "Die orale Gabe von Vancomycin ist sehr unüblich, zudem ist es ein Reserveantibiotikum für schwere Infektionen. Gibt man es so lange, riskiert man überdies lebensgefährliche Thrombozytopenien. Clindamycin hat seinen Platz in der Zahnheilkunde bei Unverträglichkeit gegenüber Amoxicillin und kann in der genannten Darreichungsform als Endokarditisprophylaxe für Risikopatienten vor bestimmten Eingriffen verabreicht werden.",
+      "points": 10,
+      "options": [
+        "Vancomycin 300 mg, 1-1-1 für 28 Tage",
+        "Amoxicillin 500 mg und Metronidazol 400 mg, 1-1-1 für 7 Tage",
+        "Clindamycin 600 mg, einmalig 30 Minuten vor AIT"
+      ],
+      "correct": [
+        1
+      ]
+    }
+  ]
+}

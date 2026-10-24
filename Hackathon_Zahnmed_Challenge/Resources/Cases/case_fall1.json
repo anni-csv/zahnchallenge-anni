@@ -1,0 +1,249 @@
+{
+  "id": "fall1",
+  "order": 1,
+  "category": "Notfallbehandlung",
+  "title": "Volksfest-Unfall",
+  "difficulty": 2,
+  "difficultyLabel": "Mittel",
+  "appearance": {
+    "sfSymbol": "cross.case.fill",
+    "gradientStart": "FFD6A5",
+    "gradientEnd": "FFEFCF",
+    "starColor": "F59E0B",
+    "headerLabel": "Notfall",
+    "headerIcon": "exclamationmark.triangle.fill"
+  },
+  "patient": {
+    "name": "Ignaz Grünzinger",
+    "details": "23 Jahre | Maurergeselle",
+    "image": "case1_patient",
+    "intro": "Der 23-jährige Maurergeselle verbrachte den Abend auf dem Palmator-Volksfest in Regensburg. Nun wird er vom Rettungsdienst in den zahnärztlichen Notdienst Ihrer Klinik gebracht.",
+    "quote": "Ich habe etwa drei Maß Bier über den Abend verteilt getrunken. Zu Fuß machte ich mich auf den Heimweg. Da ich betrunken und total kaputt war, bin ich vor dem Haus meines Onkels über eine Gehwegplatte gestolpert und mit dem Gesicht gegen einen großen Blumentopf gefallen. Sofort spürte ich einen starken Schmerz in den oberen Schneidezähnen und hatte Blut im Mund. Ich bemerkte mit der Zunge, dass mir ein Zahn fehlte. Mir war total schwindelig. Meine Freunde fanden den Zahn auf dem Boden und alarmierten den Rettungsdienst, der nach etwa 13 Minuten ankam. Sie untersuchten mich vor allem im Kopfbereich und gaben meinen Zahn in einen Beutel mit einer Flüssigkeit."
+  },
+  "tags": [
+    {
+      "label": "Notdienst 23:00",
+      "icon": "clock.fill"
+    },
+    {
+      "label": "Obere Schneidezähne",
+      "icon": "mouth.fill"
+    },
+    {
+      "label": "Rettungsdienst",
+      "icon": "cross.fill"
+    }
+  ],
+  "steps": [
+    {
+      "id": "f1-gedanken",
+      "type": "freeText",
+      "label": "Anamnese",
+      "badge": {
+        "text": "Erste Gedanken",
+        "icon": "text.bubble",
+        "color": "FFD6A5"
+      },
+      "question": "Bevor Sie den Patienten untersuchen – welche Gedanken gehen Ihnen durch den Kopf?",
+      "instruction": "Denken Sie laut nach. Es gibt keine falsche Antwort.",
+      "drLukasHint": "Denken Sie nicht nur an Zähne – der Patient hatte einen Sturz am Kopf! An Neurologie und MKG-Chirurgie denken. Was sollten Sie bei dem Patienten anordnen?",
+      "points": 0,
+      "keywords": [
+        "anamnese",
+        "bewusstsein",
+        "neurolog",
+        "mkg",
+        "untersuch",
+        "schmerz",
+        "blutung",
+        "kopf",
+        "zahn",
+        "fraktur",
+        "avulsion",
+        "sturz",
+        "fragen",
+        "ct",
+        "mrt",
+        "tetanus",
+        "alkohol"
+      ],
+      "minWords": 6,
+      "maxLength": 300
+    },
+    {
+      "id": "f1-konsil",
+      "type": "multipleChoice",
+      "label": "Konsilium",
+      "badge": {
+        "text": "Konsilium",
+        "icon": "person.2.fill",
+        "color": "C9F0FF"
+      },
+      "question": "Welche Fachrichtungen sollten Sie konsiliarisch hinzuziehen?",
+      "instruction": "Mehrere Antworten sind möglich.",
+      "points": 10,
+      "options": [
+        "MKG-Chirurgie",
+        "Neurologie",
+        "Urologie",
+        "Kardiologie"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "f1-vor-dem-mund",
+      "type": "multipleChoice",
+      "label": "Untersuchung",
+      "badge": {
+        "text": "Untersuchung",
+        "icon": "eye",
+        "color": "B5EAD7"
+      },
+      "question": "Was sollten Sie als Zahnarzt am besten noch vor dem ersten Blick in den Mund überprüfen?",
+      "instruction": "Mehrere Antworten sind möglich.",
+      "expertComment": "Auch wenn Sie als Zahnarzt vorrangig an Ihr Aufgabengebiet denken: Vergessen Sie nicht, dass an jedem Zahn ein Mensch hängt! Gerade bei Kopfverletzungen mit Zahnbeteiligung übersehen Patienten häufig, dass sie auch andere Verletzungen haben können, die eine neurologische oder gesichtschirurgische Abklärung erforderlich machen. Der Patient sollte über die Möglichkeit einer Gehirnerschütterung informiert werden und auf Warnsignale achten. Frakturen des Gesichtsschädels sind zumindest in Betracht zu ziehen. Gerade bei Verunreinigung frischer Wunden mit Erdboden ist eine Auffrischung der Tetanus-Impfung sehr wichtig!",
+      "points": 10,
+      "options": [
+        "Weichteilverletzungen im Gesicht",
+        "Palpation der Kiefer- und Mittelgesichtsknochen",
+        "Visus",
+        "Hirnnerven",
+        "Sensibilitätsstörungen",
+        "Tetanus-Impfung"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reviewNote": "Handbuch nennt keine falschen Optionen; laut Expertenkommentar sind alle relevant. Ggf. Distraktoren ergänzen."
+    },
+    {
+      "id": "f1-aufbewahrung",
+      "type": "ordering",
+      "label": "Aufbewahrung",
+      "badge": {
+        "text": "Aufbewahrung",
+        "icon": "cross.case.fill",
+        "color": "C9F0FF"
+      },
+      "question": "Bringen Sie folgende Medien zur Aufbewahrung avulsierter Zähne in die richtige Reihenfolge – beginnend mit der am besten geeigneten Substanz.",
+      "instruction": "Ziehen Sie die Karten oder nutzen Sie die Pfeile.",
+      "expertComment": "Die Zahnrettungsbox ist die erste Wahl! Haltbare Milch und sterile Kochsalzlösung sind gute Alternativen. Leitungswasser und Luft schädigen die Wurzelhaut.",
+      "drLukasHint": "Die Zahnrettungsbox enthält eine spezielle Nährlösung, die die Parodontalzellen am Leben erhält – ähnlich wie ein Organ-Transportmedium.",
+      "points": 15,
+      "items": [
+        "Zahnrettungsbox",
+        "Haltbare Milch",
+        "Sterile Kochsalzlösung",
+        "Mundspeichel",
+        "Leitungswasser",
+        "Luft"
+      ]
+    },
+    {
+      "id": "f1-diagnose",
+      "type": "matching",
+      "label": "Diagnose",
+      "badge": {
+        "text": "Diagnose",
+        "icon": "stethoscope",
+        "color": "FFD6A5"
+      },
+      "question": "Ordnen Sie dem jeweiligen Zahn Ihre Diagnose zu.",
+      "instruction": "Begutachten Sie dafür auch das 3D-Modell zum Fall.",
+      "media": {
+        "image": "case1_model_photo",
+        "caption": "3D-gedrucktes Gebissmodell zum Fall"
+      },
+      "expertComment": "Waren Sie sich bei der Begutachtung des Modells nicht sicher, ob die Zähne 12 und 22 eine Diagnose haben? Gerade bei nicht kieferorthopädisch vorbehandelten Patienten wie Herrn Grünzinger ist es oft schwer, laterale Dislokationen zu identifizieren. Hierbei helfen zum Beispiel die manuelle Palpation, Bilder und Gipsmodelle vom Zustand davor, Okklusionsstörungen oder die Berücksichtigung des Unfallmechanismus. Unser Patient fiel hauptsächlich auf die rechte Gesichtshälfte, daher ist es schon wahrscheinlich, dass der Zahn 12 etwas „abbekommen“ hat.",
+      "drLukasHint": "Beachte den Unfallmechanismus: Der Patient fiel auf die rechte Gesichtshälfte!",
+      "points": 12,
+      "pairs": [
+        {
+          "item": "11",
+          "answer": "Komplette Avulsion"
+        },
+        {
+          "item": "12",
+          "answer": "Laterale Dislokation"
+        },
+        {
+          "item": "21",
+          "answer": "Kronenfraktur mit Pulpabeteiligung"
+        },
+        {
+          "item": "22",
+          "answer": "Keine Verletzung"
+        }
+      ]
+    },
+    {
+      "id": "f1-reposition",
+      "type": "ordering",
+      "label": "Therapie",
+      "badge": {
+        "text": "Therapie",
+        "icon": "arrow.up.arrow.down.circle.fill",
+        "color": "C9F0FF"
+      },
+      "question": "Wie gehen Sie bei der Repositionierung des avulsierten Zahnes vor?",
+      "instruction": "Bringen Sie die Elemente in die richtige Reihenfolge.",
+      "expertComment": "Erst die Vitalität mit der Dentosafe-Box sichern, dann in die Alveole repositionieren, dann mit dem Titan-Trauma-Splint stabilisieren.",
+      "drLukasHint": "Zuerst die Vitalität sichern, dann repositionieren, dann stabilisieren – wie beim Einrenken eines Gelenks!",
+      "points": 15,
+      "items": [
+        "Kurzes Einlegen in Dentosafe-Box",
+        "Repositionierung in die Alveole",
+        "Anlage eines Titan-Trauma-Splints"
+      ]
+    },
+    {
+      "id": "f1-pulpa",
+      "type": "singleChoice",
+      "label": "MCQ",
+      "badge": {
+        "text": "Behandlung",
+        "icon": "cross.case.fill",
+        "color": "CAFFBF"
+      },
+      "question": "Welche Methode der Behandlung einer Kronenfraktur mit Pulpabeteiligung ist bei einem Zahn mit abgeschlossenem Wurzelwachstum indiziert?",
+      "instruction": "Eine Antwort ist richtig.",
+      "expertComment": "Bei abgeschlossenem Wurzelwachstum ist die Vitalexstirpation indiziert, gefolgt von einer Wurzelkanalbehandlung. Die partielle Pulpotomie ist eher bei jungen Zähnen mit offenem Apex angezeigt.",
+      "drLukasHint": "Entscheidend ist das Wurzelwachstum: offen = Pulpotomie, abgeschlossen = Vitalexstirpation!",
+      "points": 10,
+      "options": [
+        "Sofortige Extraktion",
+        "Vitalexstirpation",
+        "Partielle Pulpotomie",
+        "Indirekte Überkappung"
+      ],
+      "correct": [
+        1
+      ]
+    },
+    {
+      "id": "f1-upload",
+      "type": "upload",
+      "label": "Upload",
+      "badge": {
+        "text": "Dokumentation",
+        "icon": "camera.fill",
+        "color": "FFD6A5"
+      },
+      "question": "Laden Sie jetzt bis zu fünf Bilder Ihrer am 3D-Modell durchgeführten Behandlung hoch!",
+      "instruction": "Fotografieren Sie Ihre Arbeit am Modell aus verschiedenen Winkeln.",
+      "drLukasHint": "Klinische Fotografie: von vorne, seitlich und von oben fotografieren.",
+      "points": 0,
+      "minFiles": 1,
+      "maxFiles": 5,
+      "aiPrompt": "Du bist ein erfahrener Zahnarzt-Tutor an der Universität Regensburg.\nEin Zahnmedizinstudierender hat eine Übungsbehandlung am 3D-Modell durchgeführt\nund ein Foto hochgeladen.\n\nAufgabe des Studierenden war:\n- Repositionierung des avulsierten Zahns 11 in die Alveole\n- Anlage eines Titan-Trauma-Splints\n\nBewerte das Foto nach genau diesen 3 Punkten:\n1. ✅ Position Zahn 11 – korrekt reponiert? (Höhe, Achse im Vergleich zu Nachbarzähnen)\n2. 🔧 Splint-Anlage – korrekt? (Ausdehnung, Fixierung, Okklusionsfreiheit)\n3. 💡 Wichtigster Verbesserungshinweis für den Studierenden\n\nRegeln:\n- Antworte auf Deutsch\n- Maximal 130 Wörter\n- Ermutigender, lehrender Ton – wie ein guter Tutor\n- Beginne direkt mit Punkt 1, kein einleitender Satz\n- Hinweis: Dies ist ein anonymisiertes 3D-Lehrmodell, keine echten Patientendaten"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "case2_xray_bitewing.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

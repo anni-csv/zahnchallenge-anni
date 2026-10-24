@@ -2,6 +2,8 @@
 
 Nach dem Hackathon lag fast der ganze Code in vier großen Dateien. In PR #3 wurden sie auf Ordner und einzelne Dateien aufgeteilt, **ohne den Code zu ändern**.
 
+> **Hinweis:** Die acht `Step…View`-Dateien gibt es seit „Fälle als Daten“ nicht mehr. Sie wurden durch eine Ansicht pro Aufgabentyp ersetzt (`Views/Case/StepViews/`), siehe `docs/faelle-als-daten.md`.
+
 Prinzip: **eine Ansicht pro Datei**. Kleine Hilfs-Views, die nur von einer Ansicht genutzt werden, liegen mit in deren Datei (siehe Spalte „enthält auch“).
 
 Alle Pfade sind relativ zu `Hackathon_Zahnmed_Challenge/`.
