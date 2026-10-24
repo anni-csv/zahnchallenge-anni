@@ -5,8 +5,31 @@ import SceneKit
 // MARK: - SCENEKIT VIEWER (kein ARKit nötig!)
 // ─────────────────────────────────────────────
 
+/// Verbindung von SwiftUI-Buttons (Zoom) zur SceneKit-Ansicht.
+final class SceneViewHandle {
+    fileprivate weak var view: SCNView?
+
+    /// factor < 1 = näher heran, > 1 = weiter weg
+    func zoom(by factor: Float) {
+        guard let view, let camera = view.pointOfView else { return }
+        let controller = view.defaultCameraController
+        let target = controller.target
+        let p = camera.worldPosition
+        let (dx, dy, dz) = (p.x - target.x, p.y - target.y, p.z - target.z)
+        let distance = (dx * dx + dy * dy + dz * dz).squareRoot()
+        let radius = max(view.scene?.rootNode.boundingSphere.radius ?? 0.05, 0.001)
+        // Nicht ins Modell hinein und nicht ins Unendliche
+        let newDistance = min(max(distance * factor, radius * 0.6), radius * 8)
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.25
+        controller.dolly(toTarget: distance - newDistance)
+        SCNTransaction.commit()
+    }
+}
+
 struct SceneKitView: UIViewRepresentable {
     let url: URL
+    var handle: SceneViewHandle?
     var onLoaded: (() -> Void)?
     var onError: (() -> Void)?
 
@@ -16,6 +39,7 @@ struct SceneKitView: UIViewRepresentable {
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = false
         scnView.antialiasingMode = .multisampling4X
+        handle?.view = scnView
 
         DispatchQueue.global(qos: .userInitiated).async {
             do {

@@ -26,8 +26,8 @@ Die Originale kamen aus einem Online-Konverter (Convert3D.org) und hatten mehrer
 - Echte Größe (~7,6 cm), zentriert, liegt flach (Kauflächen oben, Frontzähne zur Kamera)
 - Elfenbeinfarbenes Material, neu berechnete Normalen
 - **~3,6 MB statt ~50 MB pro Modell** (insgesamt 11 MB statt 150 MB)
-- Viewer (`SceneKitView`) richtet die Kamera automatisch an Größe und Mitte des Modells aus, dreht um die Modellmitte, Doppeltippen setzt die Ansicht zurück
-- AR über Apples **AR Quick Look** (`quickLookPreview`): auf dem iPhone mit Umschalter „Objekt“ / „AR“. Im Simulator gibt es kein AR, dort öffnet sich die 3D-Vorschau.
+- Viewer (`SceneKitView`) richtet die Kamera automatisch an Größe und Mitte des Modells aus, dreht um die Modellmitte, Zoom mit zwei Fingern oder den Tasten + / −, Doppeltippen setzt die Ansicht zurück
+- AR über Apples **AR Quick Look** (`quickLookPreview`): auf dem iPhone mit Umschalter „Objekt“ / „AR“. Im Simulator gibt es kein AR Quick Look, deshalb wird der AR-Button dort ausgeblendet.
 
 ## Neues Modell hinzufügen
 
